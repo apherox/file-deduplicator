@@ -1,6 +1,6 @@
-# Project Title
+# File Deduplicator
 
-File Deduplicator application
+Java console application for removing duplicates
 
 ## Description
 

@@ -1,6 +1,7 @@
 package com.deduplicator.filededuplicator;
 
 import com.deduplicator.FileUtils;
+import com.deduplicator.storage.FileMetadata;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -50,28 +51,5 @@ public class FileUtilsTest {
 
 		// when then
 		Assertions.assertEquals("jpg", FileUtils.getExtension(relativePathToFile.toFile()));
-	}
-
-	@Test
-	public void testHashMethodReturnCorrectSHA256Hash() throws IOException, NoSuchAlgorithmException {
-		// Given
-		final String fileName = "test.txt";
-		final Path relativePathToFile = Paths.get("src", "test", "resources", "tests", fileName);
-
-		// when then
-		Assertions.assertEquals("AZVxUAYZI3IjpH6pvI33ZZSAZYILBaoj1seuFLbE4PY=", FileUtils.hash(relativePathToFile));
-	}
-
-	@Test
-	public void testHashMethodReturnSameSHA256HashForSameContent() throws IOException, NoSuchAlgorithmException {
-		// Given
-		final String fileName = "test.txt";
-		final Path relativePathToFile = Paths.get("src", "test", "resources", "tests", fileName);
-
-		final String fileName2 = "test2.txt";
-		final Path relativePathToFile2 = Paths.get("src", "test", "resources", "tests", fileName2);
-
-		// when then
-		Assertions.assertEquals(FileUtils.hash(relativePathToFile), FileUtils.hash(relativePathToFile2));
 	}
 }

@@ -1,6 +1,6 @@
 package com.deduplicator.filededuplicator;
 
-import com.deduplicator.statics.Statistics;
+import com.deduplicator.statistics.Statistics;
 import com.deduplicator.storage.InMemoryStorage;
 import com.deduplicator.walker.FileDeduplicatorImpl;
 import picocli.CommandLine;

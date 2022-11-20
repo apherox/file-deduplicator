@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /**
  * Metadata of a given analyzed file
@@ -64,12 +66,12 @@ public class FileMetadata {
 		if (result) {
 			String hash;
 			try {
-				hash = FileUtils.hash(file.toPath());
+				hash = hash(file.toPath());
+				return hash.equals(getSha256Hash());
 			} catch (IOException | NoSuchAlgorithmException e) {
 				System.err.println(e.getMessage());
 				return false;
 			}
-			return this.getSha256Hash().equals(hash);
 		}
 		return false;
 	}
@@ -94,17 +96,25 @@ public class FileMetadata {
 	 *
 	 * @return String representation of Base64 encoded SHA256 hash of content of the file
 	 */
-	private String getSha256Hash() {
-		if (StringUtils.isEmpty(sha256Hash)) {
-			try {
-				sha256Hash = FileUtils.hash(path);
-			} catch (IOException | NoSuchAlgorithmException e) {
-				System.err.println(e.getMessage());
-				return "";
-			}
+	private String getSha256Hash() throws IOException, NoSuchAlgorithmException {
+		if (sha256Hash == null || sha256Hash.length() == 0) {
+			return hash(path);
 		}
 		return sha256Hash;
 	}
 
+	/**
+	 * Create Base64Encoded SHA256 hash of file content
+	 *
+	 * @param path to file
+	 * @return String representation of Base64 encoded SHA256 hash
+	 * @throws IOException              if file can not be read
+	 * @throws NoSuchAlgorithmException if algorithm does not exist
+	 */
+	private static String hash(Path path) throws IOException, NoSuchAlgorithmException {
+		byte[] fileContents = Files.readAllBytes(path);
+		byte[] digest = MessageDigest.getInstance("SHA-256").digest(fileContents);
+		return Base64.getEncoder().encodeToString(digest);
+	}
 
 }

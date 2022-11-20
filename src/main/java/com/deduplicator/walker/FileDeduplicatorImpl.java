@@ -1,13 +1,14 @@
 package com.deduplicator.walker;
 
 import com.deduplicator.BlackList;
-import com.deduplicator.statics.Statistics;
+import com.deduplicator.statistics.Statistics;
 import com.deduplicator.storage.AbstractStorage;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Implements the {@link FileDeduplicator} interface
@@ -55,7 +56,7 @@ public final class FileDeduplicatorImpl implements FileDeduplicator {
 	}
 
 	/**
-	 * Traverse directory recursively and add files to a {@link java.util.Map}
+	 * Traverse directory recursively and add files to a {@link Map}
 	 *
 	 * @param file path provided by user to find duplicates within
 	 */

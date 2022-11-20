@@ -1,7 +1,7 @@
 package com.deduplicator.storage;
 
 import com.deduplicator.FileUtils;
-import com.deduplicator.statics.Statistics;
+import com.deduplicator.statistics.Statistics;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -58,7 +58,7 @@ public final class InMemoryStorage implements AbstractStorage<File> {
 	/**
 	 * Remove file from the storage
 	 *
-	 * @param file
+	 * @param file to be removed from the storage
 	 */
 	private void remove(File file) {
 		long size = FileMetadata.getSize(file);

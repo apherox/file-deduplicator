@@ -1,4 +1,4 @@
-package com.deduplicator.statics;
+package com.deduplicator.statistics;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -51,6 +51,7 @@ public final class Statistics {
 	public static void incrementDirectoriesTraversed() {
 		totalDirectoriesTraversed++;
 	}
+
 	public static void printStatistics() {
 		System.out.println("Statistics collected:");
 		System.out.println("---------------------------------------------------------------");
